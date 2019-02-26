@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace GameUpdater
 {
     public partial class form_gamesupdater : Form
     {
@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         private void button_refresh_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
-            using (System.IO.TextReader tr = new StreamReader("C:\\tmp\\Links_text.txt"))
+            using (System.IO.TextReader tr = new StreamReader(Application.StartupPath +"//GameUpdater.txt"))
             {
                 string line;
                 while ((line = tr.ReadLine()) != null)

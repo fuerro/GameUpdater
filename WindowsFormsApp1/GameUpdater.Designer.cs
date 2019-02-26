@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace GameUpdater
 {
     partial class form_gamesupdater
     {
