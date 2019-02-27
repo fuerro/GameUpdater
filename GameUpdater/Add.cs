@@ -43,5 +43,10 @@ namespace GameUpdater
                 MessageBox.Show("Please fill in all Textboxes!", "Alert");
             }
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

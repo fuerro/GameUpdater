@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace GameUpdater
 {
@@ -29,6 +30,7 @@ namespace GameUpdater
 
         private void button_refresh_Click(object sender, EventArgs e)
         {
+
             this.dataGridView_links.Rows.Clear();
             DataTable dt = new DataTable();
             using (System.IO.TextReader tr = new StreamReader(Application.StartupPath +"//GameUpdater.txt"))
@@ -39,19 +41,35 @@ namespace GameUpdater
                     if (line == "") continue;
 
                     string[] items = line.Trim().Split(',');
-
-                    bool result = items[1].Equals(items[2]);
-
-                    if (result == true)
+                    try
                     {
-                        Array.Resize(ref items, items.Length + 1);
-                        items[items.Length - 1] = "No";
+                        string regex_str = "<b>Version(:)?</b>(:)?";
+                        string tofind = "<b>Version";
+
+                        HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(items[3]);
+                        myRequest.Method = "GET";
+                        WebResponse myResponse = myRequest.GetResponse();
+                        StreamReader sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);
+                        string web_result = sr.ReadToEnd();
+                        sr.Close(); myResponse.Close();
+
+                        if (System.Text.RegularExpressions.Regex.IsMatch(web_result, regex_str, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                        {
+                            int start = web_result.IndexOf(tofind) + tofind.Length+6;
+                            int end = web_result.IndexOf("<br />", start);
+                            string current_version = web_result.Substring(start, end - start);
+
+                            items[1] = current_version;
+                        }
+                        else
+                            items[1] = " ";
                     }
-                    else
+
+                    catch
                     {
-                        Array.Resize(ref items, items.Length + 1);
-                        items[items.Length - 1] = "Yes";
+                        items[1] = " ";
                     }
+
                     this.dataGridView_links.Rows.Add(items);
                 }
 
