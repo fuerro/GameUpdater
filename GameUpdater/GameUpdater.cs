@@ -17,6 +17,9 @@ namespace GameUpdater
         public form_gamesupdater()
         {
             InitializeComponent();
+            StreamWriter sw = File.AppendText(Application.StartupPath + "//GameUpdater.txt");
+            sw.Close();
+
         }
 
         private void button_exit_Click(object sender, EventArgs e)
