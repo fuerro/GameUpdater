@@ -12,6 +12,7 @@ using System.Windows.Forms;
 namespace GameUpdater
 {
     public partial class form_gamesupdater : Form
+
     {
         public form_gamesupdater()
         {
@@ -25,30 +26,40 @@ namespace GameUpdater
 
         private void button_refresh_Click(object sender, EventArgs e)
         {
+            this.dataGridView_links.Rows.Clear();
             DataTable dt = new DataTable();
             using (System.IO.TextReader tr = new StreamReader(Application.StartupPath +"//GameUpdater.txt"))
             {
                 string line;
                 while ((line = tr.ReadLine()) != null)
                 {
+                    if (line == "") continue;
 
                     string[] items = line.Trim().Split(',');
-                    if (dt.Columns.Count == 0)
+
+                    bool result = items[1].Equals(items[2]);
+
+                    if (result == true)
                     {
-                        // Create the data columns for the data table based on the number of items
-                        // on the first line of the file
-                        for (int i = 0; i < items.Length; i++)
-                            dt.Columns.Add(new DataColumn("Column" + i, typeof(string)));
+                        Array.Resize(ref items, items.Length + 1);
+                        items[items.Length - 1] = "No";
                     }
-                    dt.Rows.Add(items);
-
+                    else
+                    {
+                        Array.Resize(ref items, items.Length + 1);
+                        items[items.Length - 1] = "Yes";
+                    }
+                    this.dataGridView_links.Rows.Add(items);
                 }
-                //show it in gridview
-                this.dataGridView_links.DataSource = dt;
 
-                //if ((dataGridView_links.Columns[1].ToString()).Equals(dataGridView_links.Columns[2].ToString()))
-                //    dataGridView_links.Columns[4]. = "Yes";
             }
+        }
+
+        private void button_add_Click(object sender, EventArgs e)
+        {
+            //this.Hide();
+            form_add form2 = new form_add();
+            form2.ShowDialog();
         }
     }
 }
