@@ -37,15 +37,16 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.progressBar_checking = new System.Windows.Forms.ProgressBar();
+            this.button_openrepo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_links)).BeginInit();
             this.SuspendLayout();
             // 
             // button_exit
             // 
             this.button_exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_exit.Location = new System.Drawing.Point(636, 456);
+            this.button_exit.Location = new System.Drawing.Point(636, 454);
             this.button_exit.Name = "button_exit";
-            this.button_exit.Size = new System.Drawing.Size(132, 41);
+            this.button_exit.Size = new System.Drawing.Size(132, 52);
             this.button_exit.TabIndex = 0;
             this.button_exit.Text = "Exit";
             this.button_exit.UseVisualStyleBackColor = true;
@@ -54,9 +55,9 @@
             // button_refresh
             // 
             this.button_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_refresh.Location = new System.Drawing.Point(498, 456);
+            this.button_refresh.Location = new System.Drawing.Point(498, 454);
             this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(132, 41);
+            this.button_refresh.Size = new System.Drawing.Size(132, 24);
             this.button_refresh.TabIndex = 1;
             this.button_refresh.Text = "Check for Updates";
             this.button_refresh.UseVisualStyleBackColor = true;
@@ -77,15 +78,15 @@
             this.Column4});
             this.dataGridView_links.Location = new System.Drawing.Point(13, 13);
             this.dataGridView_links.Name = "dataGridView_links";
-            this.dataGridView_links.Size = new System.Drawing.Size(755, 437);
+            this.dataGridView_links.Size = new System.Drawing.Size(755, 435);
             this.dataGridView_links.TabIndex = 2;
             // 
             // button_add
             // 
             this.button_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_add.Location = new System.Drawing.Point(13, 456);
+            this.button_add.Location = new System.Drawing.Point(13, 454);
             this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(135, 41);
+            this.button_add.Size = new System.Drawing.Size(135, 52);
             this.button_add.TabIndex = 3;
             this.button_add.Text = "Add";
             this.button_add.UseVisualStyleBackColor = true;
@@ -113,17 +114,28 @@
             // 
             // progressBar_checking
             // 
-            this.progressBar_checking.Location = new System.Drawing.Point(155, 456);
+            this.progressBar_checking.Location = new System.Drawing.Point(154, 454);
             this.progressBar_checking.Maximum = 0;
             this.progressBar_checking.Name = "progressBar_checking";
-            this.progressBar_checking.Size = new System.Drawing.Size(337, 41);
+            this.progressBar_checking.Size = new System.Drawing.Size(337, 52);
             this.progressBar_checking.TabIndex = 4;
+            // 
+            // button_openrepo
+            // 
+            this.button_openrepo.Location = new System.Drawing.Point(497, 484);
+            this.button_openrepo.Name = "button_openrepo";
+            this.button_openrepo.Size = new System.Drawing.Size(132, 22);
+            this.button_openrepo.TabIndex = 5;
+            this.button_openrepo.Text = "Open Data-File";
+            this.button_openrepo.UseVisualStyleBackColor = true;
+            this.button_openrepo.Click += new System.EventHandler(this.button_openrepo_Click);
             // 
             // form_gamesupdater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 501);
+            this.ClientSize = new System.Drawing.Size(776, 510);
+            this.Controls.Add(this.button_openrepo);
             this.Controls.Add(this.progressBar_checking);
             this.Controls.Add(this.button_add);
             this.Controls.Add(this.dataGridView_links);
@@ -148,6 +160,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ProgressBar progressBar_checking;
+        private System.Windows.Forms.Button button_openrepo;
     }
 }
 
