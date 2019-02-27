@@ -36,6 +36,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.progressBar_checking = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_links)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,9 +54,9 @@
             // button_refresh
             // 
             this.button_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_refresh.Location = new System.Drawing.Point(498, 457);
+            this.button_refresh.Location = new System.Drawing.Point(498, 456);
             this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(132, 40);
+            this.button_refresh.Size = new System.Drawing.Size(132, 41);
             this.button_refresh.TabIndex = 1;
             this.button_refresh.Text = "Check for Updates";
             this.button_refresh.UseVisualStyleBackColor = true;
@@ -63,6 +64,7 @@
             // 
             // dataGridView_links
             // 
+            this.dataGridView_links.AllowUserToAddRows = false;
             this.dataGridView_links.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -83,7 +85,7 @@
             this.button_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button_add.Location = new System.Drawing.Point(13, 456);
             this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(135, 39);
+            this.button_add.Size = new System.Drawing.Size(135, 41);
             this.button_add.TabIndex = 3;
             this.button_add.Text = "Add";
             this.button_add.UseVisualStyleBackColor = true;
@@ -109,11 +111,20 @@
             this.Column4.HeaderText = "Link";
             this.Column4.Name = "Column4";
             // 
+            // progressBar_checking
+            // 
+            this.progressBar_checking.Location = new System.Drawing.Point(155, 456);
+            this.progressBar_checking.Maximum = 0;
+            this.progressBar_checking.Name = "progressBar_checking";
+            this.progressBar_checking.Size = new System.Drawing.Size(337, 41);
+            this.progressBar_checking.TabIndex = 4;
+            // 
             // form_gamesupdater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 501);
+            this.Controls.Add(this.progressBar_checking);
             this.Controls.Add(this.button_add);
             this.Controls.Add(this.dataGridView_links);
             this.Controls.Add(this.button_refresh);
@@ -136,6 +147,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ProgressBar progressBar_checking;
     }
 }
 

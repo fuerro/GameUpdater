@@ -43,7 +43,7 @@
             // textBox_name
             // 
             this.textBox_name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_name.Location = new System.Drawing.Point(121, 48);
+            this.textBox_name.Location = new System.Drawing.Point(121, 9);
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(282, 20);
             this.textBox_name.TabIndex = 0;
@@ -51,7 +51,7 @@
             // textBox_version
             // 
             this.textBox_version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_version.Location = new System.Drawing.Point(121, 87);
+            this.textBox_version.Location = new System.Drawing.Point(121, 48);
             this.textBox_version.Name = "textBox_version";
             this.textBox_version.Size = new System.Drawing.Size(282, 20);
             this.textBox_version.TabIndex = 1;
@@ -59,7 +59,7 @@
             // textBox_link
             // 
             this.textBox_link.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_link.Location = new System.Drawing.Point(121, 9);
+            this.textBox_link.Location = new System.Drawing.Point(121, 87);
             this.textBox_link.Name = "textBox_link";
             this.textBox_link.Size = new System.Drawing.Size(282, 20);
             this.textBox_link.TabIndex = 2;
@@ -124,14 +124,14 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.31034F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.68965F));
-            this.tableLayoutPanel1.Controls.Add(this.label_link, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label_version, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_link, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label_name, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_name, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_version, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.button_add_item, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.button_cancel, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_link, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label_link, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_version, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_name, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;

@@ -20,6 +20,8 @@ namespace GameUpdater
             InitializeComponent();
             StreamWriter sw = File.AppendText(Application.StartupPath + "//GameUpdater.txt");
             sw.Close();
+            dataGridView_links.ReadOnly = false;
+            dataGridView_links.Columns[1].ReadOnly = true;
 
         }
 
@@ -36,9 +38,18 @@ namespace GameUpdater
             using (System.IO.TextReader tr = new StreamReader(Application.StartupPath +"//GameUpdater.txt"))
             {
                 string line;
+
+                var file_counter = new StreamReader(Application.StartupPath + "//GameUpdater.txt").ReadToEnd(); // big string
+                var lines = file_counter.Split(new char[] { '\n' });           // big array
+                var count = lines.Count();
+
+                progressBar_checking.Maximum = (progressBar_checking.Step * count);
+
                 while ((line = tr.ReadLine()) != null)
                 {
-                    if (line == "") continue;
+                    if (line == "") { progressBar_checking.PerformStep(); continue; }
+
+                    progressBar_checking.PerformStep();
 
                     string[] items = line.Trim().Split(',');
                     try
@@ -71,6 +82,7 @@ namespace GameUpdater
                     }
 
                     this.dataGridView_links.Rows.Add(items);
+                    this.dataGridView_links.Sort(this.dataGridView_links.Columns["Column1"], ListSortDirection.Ascending);
                 }
 
             }
@@ -78,7 +90,6 @@ namespace GameUpdater
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            //this.Hide();
             form_add form2 = new form_add();
             form2.ShowDialog();
         }
