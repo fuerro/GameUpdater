@@ -95,6 +95,18 @@ namespace GameUpdater
                     
                 }
                 tr.Close();
+
+                foreach(DataGridViewRow row in dataGridView_links.Rows)
+                {
+                    if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightPink;
+                    }
+                }
             }
             
         }
