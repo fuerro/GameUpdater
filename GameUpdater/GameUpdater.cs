@@ -61,7 +61,7 @@ namespace GameUpdater
                     string[] items = line.Trim().Split(',');
                     try
                     {
-                        string regex_str = "<b>Version(:)?</b>(:)?";
+                        string regex_str = "<b>Version(:)?( )?</b>(:)?";
                         string tofind = "<b>Version";
 
                         HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(items[3]);
