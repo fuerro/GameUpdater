@@ -24,6 +24,25 @@ namespace GameUpdater
             dataGridView_links.ReadOnly = false;
             dataGridView_links.Columns[1].ReadOnly = true;
 
+            System.IO.TextReader tr = new StreamReader(Application.StartupPath + "//GameUpdater.txt");
+            string line;
+            while ((line = tr.ReadLine()) != null)
+            {
+                string[] items = line.Trim().Split(',');
+                this.dataGridView_links.Rows.Add(items);
+                this.dataGridView_links.Sort(this.dataGridView_links.Columns["Column1"], ListSortDirection.Ascending);
+            }
+            foreach (DataGridViewRow row in dataGridView_links.Rows)
+            {
+                if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightPink;
+                }
+            }
         }
 
         private void button_exit_Click(object sender, EventArgs e)
@@ -78,6 +97,7 @@ namespace GameUpdater
                             string current_version = web_result.Substring(start, end - start);
 
                             items[1] = current_version;
+
                         }
                         else
                             items[1] = " ";
@@ -96,7 +116,9 @@ namespace GameUpdater
                 }
                 tr.Close();
 
-                foreach(DataGridViewRow row in dataGridView_links.Rows)
+                StreamWriter tw = new StreamWriter(@Application.StartupPath + "//GameUpdater.txt");
+
+                foreach (DataGridViewRow row in dataGridView_links.Rows)
                 {
                     if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
                     {
@@ -106,7 +128,12 @@ namespace GameUpdater
                     {
                         row.DefaultCellStyle.BackColor = Color.LightPink;
                     }
+
+                    line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString();
+                    tw.WriteLine(line);
+
                 }
+                tw.Close();
             }
             
         }
