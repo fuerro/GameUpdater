@@ -43,6 +43,7 @@ namespace GameUpdater
                     row.DefaultCellStyle.BackColor = Color.LightPink;
                 }
             }
+            tr.Close();
         }
 
         private void button_exit_Click(object sender, EventArgs e)
@@ -108,6 +109,7 @@ namespace GameUpdater
                         items[1] = " ";
                     }
 
+
                     progressBar_checking.Maximum--;
 
                     this.dataGridView_links.Rows.Add(items);
@@ -115,6 +117,15 @@ namespace GameUpdater
                     
                 }
                 tr.Close();
+
+                if (count == 1 && line == null) MessageBox.Show("You have no Entrys in the Data File!", "Alert");
+
+                if (progressBar_checking.Step * count < 60)
+                {
+                    progressBar_checking.Maximum = 60;
+                    for (int i = progressBar_checking.Value; i <= progressBar_checking.Maximum;i++) { progressBar_checking.PerformStep(); }
+                    progressBar_checking.Maximum--;
+                }
 
                 StreamWriter tw = new StreamWriter(@Application.StartupPath + "//GameUpdater.txt");
 
