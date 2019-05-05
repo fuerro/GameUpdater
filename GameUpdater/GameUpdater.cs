@@ -159,5 +159,31 @@ namespace GameUpdater
         {
             Process.Start(Application.StartupPath + "//GameUpdater.txt");
         }
+
+        private void button_reload_Click(object sender, EventArgs e)
+        {
+            this.dataGridView_links.Rows.Clear();
+
+            System.IO.TextReader tr = new StreamReader(Application.StartupPath + "//GameUpdater.txt");
+            string line;
+            while ((line = tr.ReadLine()) != null)
+            {
+                string[] items = line.Trim().Split(',');
+                this.dataGridView_links.Rows.Add(items);
+                this.dataGridView_links.Sort(this.dataGridView_links.Columns["Column1"], ListSortDirection.Ascending);
+            }
+            foreach (DataGridViewRow row in dataGridView_links.Rows)
+            {
+                if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightPink;
+                }
+            }
+            tr.Close();
+        }
     }
 }
