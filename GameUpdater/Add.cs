@@ -13,6 +13,7 @@ namespace GameUpdater
 {
     public partial class form_add : Form
     {
+
         public form_add()
         {
             InitializeComponent();
@@ -30,6 +31,8 @@ namespace GameUpdater
 
         private void button_add_item_Click(object sender, EventArgs e)
         {
+            var principalForm = Application.OpenForms.OfType<Form_gamesupdater>().FirstOrDefault();
+
             if (!string.IsNullOrWhiteSpace(textBox_name.Text) && !string.IsNullOrWhiteSpace(textBox_version.Text) && !string.IsNullOrWhiteSpace(textBox_link.Text)) {
                 // write a line of text to the file
                 File.AppendAllText(Application.StartupPath + "//GameUpdater.txt", textBox_name.Text + "," + " " + "," + textBox_version.Text + "," + textBox_link.Text + Environment.NewLine);
@@ -37,6 +40,8 @@ namespace GameUpdater
                 textBox_name.Clear();
                 textBox_version.Clear();
                 textBox_link.Clear();
+
+                principalForm.RefreshList();
             }
             else
             {

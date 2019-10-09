@@ -16,7 +16,7 @@ namespace GameUpdater
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new form_gamesupdater());
+            Application.Run(new Form_gamesupdater());
         }
     }
 }

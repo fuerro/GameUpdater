@@ -13,11 +13,14 @@ using System.Diagnostics;
 
 namespace GameUpdater
 {
-    public partial class form_gamesupdater : Form
+    public partial class Form_gamesupdater : Form
 
     {
-        public form_gamesupdater()
+        FileSystemWatcher watcher;
+
+        public Form_gamesupdater()
         {
+
             InitializeComponent();
             StreamWriter sw = File.AppendText(Application.StartupPath + "//GameUpdater.txt");
             sw.Close();
@@ -44,6 +47,21 @@ namespace GameUpdater
                 }
             }
             tr.Close();
+
+            watcher = new FileSystemWatcher()
+            {
+                Path = Application.StartupPath,
+                Filter = "*.txt",
+                NotifyFilter = NotifyFilters.LastWrite
+            };
+            watcher.Changed += OnChanged;
+
+            watcher.EnableRaisingEvents = true;
+        }
+
+        private void OnChanged(object source, FileSystemEventArgs e)
+        {
+            RefreshList();
         }
 
         private void button_exit_Click(object sender, EventArgs e)
@@ -162,6 +180,12 @@ namespace GameUpdater
 
         private void button_reload_Click(object sender, EventArgs e)
         {
+            RefreshList();
+        }
+
+
+        public void RefreshList()
+        {
             this.dataGridView_links.Rows.Clear();
 
             System.IO.TextReader tr = new StreamReader(Application.StartupPath + "//GameUpdater.txt");
@@ -184,6 +208,8 @@ namespace GameUpdater
                 }
             }
             tr.Close();
+
         }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace GameUpdater
 {
-    partial class form_gamesupdater
+    partial class Form_gamesupdater
     {
         /// <summary>
         /// Required designer variable.
