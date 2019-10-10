@@ -17,6 +17,7 @@ namespace GameUpdater
 
     {
         FileSystemWatcher watcher;
+        string line;
 
         public Form_gamesupdater()
         {
@@ -61,7 +62,15 @@ namespace GameUpdater
 
         private void OnChanged(object source, FileSystemEventArgs e)
         {
-            RefreshList();
+            try
+            {
+                watcher.EnableRaisingEvents = false;
+                WriteDataToFile();
+            }
+            finally
+            {
+                watcher.EnableRaisingEvents = true;
+            }
         }
 
         private void button_exit_Click(object sender, EventArgs e)
@@ -71,6 +80,8 @@ namespace GameUpdater
 
         private void button_refresh_Click(object sender, EventArgs e)
         {
+            watcher.EnableRaisingEvents = false;
+
             progressBar_checking.Value = 0;
 
             System.IO.TextReader tr_count = new StreamReader(Application.StartupPath + "//GameUpdater.txt"); // big string
@@ -138,33 +149,17 @@ namespace GameUpdater
 
                 if (count == 1 && line == null) MessageBox.Show("You have no Entrys in the Data File!", "Alert");
 
-                if (progressBar_checking.Step * count < 60)
-                {
-                    progressBar_checking.Maximum = 60;
-                    for (int i = progressBar_checking.Value; i <= progressBar_checking.Maximum;i++) { progressBar_checking.PerformStep(); }
-                    progressBar_checking.Maximum--;
-                }
 
-                StreamWriter tw = new StreamWriter(@Application.StartupPath + "//GameUpdater.txt");
+                progressBar_checking.Maximum = 60;
+                for (int i = progressBar_checking.Value; i <= progressBar_checking.Maximum;i++) { progressBar_checking.PerformStep(); }
+                progressBar_checking.Maximum--;
 
-                foreach (DataGridViewRow row in dataGridView_links.Rows)
-                {
-                    if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
-                    {
-                        row.DefaultCellStyle.BackColor = Color.LightGreen;
-                    }
-                    else
-                    {
-                        row.DefaultCellStyle.BackColor = Color.LightPink;
-                    }
-
-                    line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString();
-                    tw.WriteLine(line);
-
-                }
-                tw.Close();
             }
-            
+
+            WriteDataToFile();
+
+            watcher.EnableRaisingEvents = true;
+
         }
 
         private void button_add_Click(object sender, EventArgs e)
@@ -186,16 +181,72 @@ namespace GameUpdater
 
         public void RefreshList()
         {
-            this.dataGridView_links.Rows.Clear();
-
-            System.IO.TextReader tr = new StreamReader(Application.StartupPath + "//GameUpdater.txt");
-            string line;
-            while ((line = tr.ReadLine()) != null)
+            watcher.EnableRaisingEvents = false;
+            try
             {
-                string[] items = line.Trim().Split(',');
-                this.dataGridView_links.Rows.Add(items);
-                this.dataGridView_links.Sort(this.dataGridView_links.Columns["Column1"], ListSortDirection.Ascending);
+                this.dataGridView_links.BeginInvoke(new Action(() => dataGridView_links.Rows.Clear()));
+
+                System.IO.TextReader tr = new StreamReader(Application.StartupPath + "//GameUpdater.txt");
+
+                while ((line = tr.ReadLine()) != null)
+                {
+                    string[] items = line.Trim().Split(',');
+                    this.dataGridView_links.Invoke(new Action(() => dataGridView_links.Rows.Add(items)));
+                    this.dataGridView_links.Invoke(new Action(() => dataGridView_links.Sort(this.dataGridView_links.Columns["Column1"], ListSortDirection.Ascending)));
+                }
+                foreach (DataGridViewRow row in dataGridView_links.Rows)
+                {
+                    if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightPink;
+                    }
+                }
+                tr.Close();
+
             }
+            catch
+            {
+
+            }
+            watcher.EnableRaisingEvents = true;
+        }
+
+        private void WriteDataToFile()
+        {
+            watcher.EnableRaisingEvents = false;
+
+            StreamWriter tw = new StreamWriter(@Application.StartupPath + "//GameUpdater.txt");
+
+            foreach (DataGridViewRow row in dataGridView_links.Rows)
+            {
+
+                if (row.Cells[0].Value == null)
+                {
+                    row.Cells[0].Value = " ";
+                }
+                if (row.Cells[1].Value == null)
+                {
+                    row.Cells[1].Value = " ";
+                }
+                if (row.Cells[2].Value == null)
+                {
+                    row.Cells[2].Value = " ";
+                }
+                if (row.Cells[3].Value == null)
+                {
+                    row.Cells[3].Value = " ";
+                }
+
+                line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString();
+                tw.WriteLine(line);
+
+            }
+            tw.Close();
+
             foreach (DataGridViewRow row in dataGridView_links.Rows)
             {
                 if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
@@ -207,9 +258,19 @@ namespace GameUpdater
                     row.DefaultCellStyle.BackColor = Color.LightPink;
                 }
             }
-            tr.Close();
+
+            watcher.EnableRaisingEvents = true;
 
         }
 
+        private void dataGridView_links_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            WriteDataToFile();
+        }
+
+        private void dataGridView_links_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            WriteDataToFile();
+        }
     }
 }

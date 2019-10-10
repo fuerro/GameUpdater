@@ -81,6 +81,8 @@
             this.dataGridView_links.Name = "dataGridView_links";
             this.dataGridView_links.Size = new System.Drawing.Size(755, 447);
             this.dataGridView_links.TabIndex = 2;
+            this.dataGridView_links.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_links_CellEndEdit);
+            this.dataGridView_links.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView_links_RowsRemoved);
             // 
             // Column1
             // 
@@ -145,7 +147,7 @@
             this.button_reload.UseVisualStyleBackColor = true;
             this.button_reload.Click += new System.EventHandler(this.button_reload_Click);
             // 
-            // form_gamesupdater
+            // Form_gamesupdater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -157,7 +159,7 @@
             this.Controls.Add(this.dataGridView_links);
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.button_exit);
-            this.Name = "form_gamesupdater";
+            this.Name = "Form_gamesupdater";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameUpdater";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_links)).EndInit();

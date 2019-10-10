@@ -152,7 +152,6 @@
             this.Name = "form_add";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Entry";
-            this.Load += new System.EventHandler(this.Add_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
