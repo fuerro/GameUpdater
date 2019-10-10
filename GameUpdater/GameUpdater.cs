@@ -18,6 +18,7 @@ namespace GameUpdater
     {
         FileSystemWatcher watcher;
         string line;
+        Boolean checkingForUpdates = false;
 
         public Form_gamesupdater()
         {
@@ -52,7 +53,7 @@ namespace GameUpdater
             watcher = new FileSystemWatcher()
             {
                 Path = Application.StartupPath,
-                Filter = "*.txt",
+                Filter = "GameUpdater.txt",
                 NotifyFilter = NotifyFilters.LastWrite
             };
             watcher.Changed += OnChanged;
@@ -81,19 +82,20 @@ namespace GameUpdater
         private void button_refresh_Click(object sender, EventArgs e)
         {
             watcher.EnableRaisingEvents = false;
-
+            checkingForUpdates = true;
             progressBar_checking.Value = 0;
 
-            System.IO.TextReader tr_count = new StreamReader(Application.StartupPath + "//GameUpdater.txt"); // big string
+            System.IO.TextReader tr_count = new StreamReader(Application.StartupPath + "//GameUpdater.txt");
 
             var file_counter = tr_count.ReadToEnd();
 
-            var lines = file_counter.Split(new char[] { '\n' });           // big array
+            var lines = file_counter.Split(new char[] { '\n' });
             var count = lines.Count();
 
             tr_count.Close();
 
             this.dataGridView_links.Rows.Clear();
+
             DataTable dt = new DataTable();
             using (System.IO.TextReader tr = new StreamReader(Application.StartupPath +"//GameUpdater.txt"))
             {
@@ -108,6 +110,8 @@ namespace GameUpdater
                     progressBar_checking.PerformStep();
 
                     string[] items = line.Trim().Split(',');
+                    StreamReader sr = null;
+
                     try
                     {
                         string regex_str = "<b>Version(:)?( )?</b>(:)?";
@@ -116,7 +120,7 @@ namespace GameUpdater
                         HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(items[3]);
                         myRequest.Method = "GET";
                         WebResponse myResponse = myRequest.GetResponse();
-                        StreamReader sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);
+                        sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);
                         string web_result = sr.ReadToEnd();
                         sr.Close(); myResponse.Close();
 
@@ -156,9 +160,9 @@ namespace GameUpdater
 
             }
 
-            WriteDataToFile();
-
             watcher.EnableRaisingEvents = true;
+            checkingForUpdates = false;
+            WriteDataToFile();
 
         }
 
@@ -170,12 +174,7 @@ namespace GameUpdater
 
         private void button_openrepo_Click(object sender, EventArgs e)
         {
-            Process.Start(Application.StartupPath + "//GameUpdater.txt");
-        }
-
-        private void button_reload_Click(object sender, EventArgs e)
-        {
-            RefreshList();
+            Process.Start(Application.StartupPath);
         }
 
 
@@ -217,48 +216,50 @@ namespace GameUpdater
 
         private void WriteDataToFile()
         {
-            watcher.EnableRaisingEvents = false;
-
-            StreamWriter tw = new StreamWriter(@Application.StartupPath + "//GameUpdater.txt");
-
-            foreach (DataGridViewRow row in dataGridView_links.Rows)
+            if (checkingForUpdates == false)
             {
+                watcher.EnableRaisingEvents = false;
 
-                if (row.Cells[0].Value == null)
-                {
-                    row.Cells[0].Value = " ";
-                }
-                if (row.Cells[1].Value == null)
-                {
-                    row.Cells[1].Value = " ";
-                }
-                if (row.Cells[2].Value == null)
-                {
-                    row.Cells[2].Value = " ";
-                }
-                if (row.Cells[3].Value == null)
-                {
-                    row.Cells[3].Value = " ";
-                }
+                StreamWriter tw = new StreamWriter(@Application.StartupPath + "//GameUpdater.txt");
 
-                line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString();
-                tw.WriteLine(line);
+                foreach (DataGridViewRow row in dataGridView_links.Rows)
+                {
 
+                    if (row.Cells[0].Value == null)
+                    {
+                        row.Cells[0].Value = " ";
+                    }
+                    if (row.Cells[1].Value == null)
+                    {
+                        row.Cells[1].Value = " ";
+                    }
+                    if (row.Cells[2].Value == null)
+                    {
+                        row.Cells[2].Value = " ";
+                    }
+                    if (row.Cells[3].Value == null)
+                    {
+                        row.Cells[3].Value = " ";
+                    }
+
+                    line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString();
+                    tw.WriteLine(line);
+
+                }
+                tw.Close();
+
+                foreach (DataGridViewRow row in dataGridView_links.Rows)
+                {
+                    if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightPink;
+                    }
+                }
             }
-            tw.Close();
-
-            foreach (DataGridViewRow row in dataGridView_links.Rows)
-            {
-                if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
-                {
-                    row.DefaultCellStyle.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Color.LightPink;
-                }
-            }
-
             watcher.EnableRaisingEvents = true;
 
         }

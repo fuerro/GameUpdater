@@ -38,16 +38,15 @@
             this.button_add = new System.Windows.Forms.Button();
             this.progressBar_checking = new System.Windows.Forms.ProgressBar();
             this.button_openrepo = new System.Windows.Forms.Button();
-            this.button_reload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_links)).BeginInit();
             this.SuspendLayout();
             // 
             // button_exit
             // 
             this.button_exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_exit.Location = new System.Drawing.Point(636, 496);
+            this.button_exit.Location = new System.Drawing.Point(636, 494);
             this.button_exit.Name = "button_exit";
-            this.button_exit.Size = new System.Drawing.Size(132, 22);
+            this.button_exit.Size = new System.Drawing.Size(132, 24);
             this.button_exit.TabIndex = 0;
             this.button_exit.Text = "Exit";
             this.button_exit.UseVisualStyleBackColor = true;
@@ -58,7 +57,7 @@
             this.button_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_refresh.Location = new System.Drawing.Point(497, 466);
             this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(132, 24);
+            this.button_refresh.Size = new System.Drawing.Size(132, 52);
             this.button_refresh.TabIndex = 1;
             this.button_refresh.Text = "Check for Updates";
             this.button_refresh.UseVisualStyleBackColor = true;
@@ -128,31 +127,19 @@
             // button_openrepo
             // 
             this.button_openrepo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_openrepo.Location = new System.Drawing.Point(497, 496);
+            this.button_openrepo.Location = new System.Drawing.Point(636, 466);
             this.button_openrepo.Name = "button_openrepo";
-            this.button_openrepo.Size = new System.Drawing.Size(132, 22);
+            this.button_openrepo.Size = new System.Drawing.Size(132, 24);
             this.button_openrepo.TabIndex = 5;
-            this.button_openrepo.Text = "Open Data-File";
+            this.button_openrepo.Text = "Open Application Path";
             this.button_openrepo.UseVisualStyleBackColor = true;
             this.button_openrepo.Click += new System.EventHandler(this.button_openrepo_Click);
-            // 
-            // button_reload
-            // 
-            this.button_reload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_reload.Location = new System.Drawing.Point(636, 466);
-            this.button_reload.Name = "button_reload";
-            this.button_reload.Size = new System.Drawing.Size(132, 24);
-            this.button_reload.TabIndex = 6;
-            this.button_reload.Text = "Refresh";
-            this.button_reload.UseVisualStyleBackColor = true;
-            this.button_reload.Click += new System.EventHandler(this.button_reload_Click);
             // 
             // Form_gamesupdater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 522);
-            this.Controls.Add(this.button_reload);
             this.Controls.Add(this.button_openrepo);
             this.Controls.Add(this.progressBar_checking);
             this.Controls.Add(this.button_add);
@@ -179,7 +166,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ProgressBar progressBar_checking;
         private System.Windows.Forms.Button button_openrepo;
-        private System.Windows.Forms.Button button_reload;
     }
 }
 
