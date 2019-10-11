@@ -26,10 +26,11 @@ namespace GameUpdater
 
         private void button_add_item_Click(object sender, EventArgs e)
         {
+            
 
             if (!string.IsNullOrWhiteSpace(textBox_name.Text) && !string.IsNullOrWhiteSpace(textBox_version.Text) && !string.IsNullOrWhiteSpace(textBox_link.Text)) {
-                // write a line of text to the file
-                File.AppendAllText(Application.StartupPath + "//GameUpdater.txt", textBox_name.Text + "," + " " + "," + textBox_version.Text + "," + textBox_link.Text + Environment.NewLine);
+
+                File.AppendAllText(Application.StartupPath + "//GameUpdater.txt", textBox_name.Text + ", ," + textBox_version.Text + "," + textBox_link.Text + Environment.NewLine);
 
                 textBox_name.Clear();
                 textBox_version.Clear();

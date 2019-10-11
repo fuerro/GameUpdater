@@ -48,10 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>1FC1115B475D134ACF6597ED224391E39B38ECEA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A351D3E6BE5C477B6CE962EB31D206C025A7B13F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GameUpdater_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GameUpdater_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -103,6 +103,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="GameUpdater_1_TemporaryKey.pfx" />
     <None Include="GameUpdater_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

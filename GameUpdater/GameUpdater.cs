@@ -214,7 +214,7 @@ namespace GameUpdater
             watcher.EnableRaisingEvents = true;
         }
 
-        private void WriteDataToFile()
+        public void WriteDataToFile()
         {
             if (checkingForUpdates == false)
             {
