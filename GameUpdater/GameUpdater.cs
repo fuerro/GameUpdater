@@ -16,13 +16,15 @@ namespace GameUpdater
     public partial class Form_gamesupdater : Form
 
     {
-        FileSystemWatcher watcher;
+
+        public static Form_gamesupdater Instance { get; private set;}
+        public static FileSystemWatcher watcher;
         string line;
-        Boolean checkingForUpdates = false;
+        public static Boolean checkingForUpdates = false;
 
         public Form_gamesupdater()
         {
-
+            Instance = this;
             InitializeComponent();
             StreamWriter sw = File.AppendText(Application.StartupPath + "//GameUpdater.txt");
             sw.Close();

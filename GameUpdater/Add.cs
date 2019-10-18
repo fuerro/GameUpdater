@@ -27,15 +27,20 @@ namespace GameUpdater
         private void button_add_item_Click(object sender, EventArgs e)
         {
             
-
             if (!string.IsNullOrWhiteSpace(textBox_name.Text) && !string.IsNullOrWhiteSpace(textBox_version.Text) && !string.IsNullOrWhiteSpace(textBox_link.Text)) {
-
+                
+                Form_gamesupdater.checkingForUpdates = true;
+                
                 File.AppendAllText(Application.StartupPath + "//GameUpdater.txt", textBox_name.Text + ", ," + textBox_version.Text + "," + textBox_link.Text + Environment.NewLine);
+                
+
+                Form_gamesupdater.Instance.RefreshList();
 
                 textBox_name.Clear();
                 textBox_version.Clear();
                 textBox_link.Clear();
 
+                Form_gamesupdater.checkingForUpdates = false;
             }
             else
             {
