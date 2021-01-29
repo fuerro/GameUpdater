@@ -31,7 +31,7 @@ namespace GameUpdater
                 
                 Form_gamesupdater.checkingForUpdates = true;
                 
-                File.AppendAllText(Application.StartupPath + "//GameUpdater.txt", textBox_name.Text + ", ," + textBox_version.Text + "," + textBox_link.Text + Environment.NewLine);
+                File.AppendAllText(Application.StartupPath + "//GameUpdater.txt", "," + textBox_name.Text + ", ," + textBox_version.Text + ", ," + textBox_link.Text + Environment.NewLine);
                 
 
                 Form_gamesupdater.Instance.RefreshList();

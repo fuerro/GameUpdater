@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Web;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace GameUpdater
 {
@@ -28,20 +30,30 @@ namespace GameUpdater
             InitializeComponent();
             StreamWriter sw = File.AppendText(Application.StartupPath + "//GameUpdater.txt");
             sw.Close();
-            dataGridView_links.ReadOnly = false;
-            dataGridView_links.Columns[1].ReadOnly = true;
+            //dataGridView_links.ReadOnly = false;
+            //dataGridView_links.Columns[1].ReadOnly = true;
 
             System.IO.TextReader tr = new StreamReader(Application.StartupPath + "//GameUpdater.txt");
             string line;
             while ((line = tr.ReadLine()) != null)
             {
+                int commaCount = Regex.Matches(line, ",").Count;
+                if (commaCount == 4)
+                {
+                    line = "," + line;
+                }
+                if (commaCount == 3)
+                {
+                    line = "," + line;
+                    line.Replace(",http", ",,http");
+                }
                 string[] items = line.Trim().Split(',');
                 this.dataGridView_links.Rows.Add(items);
                 this.dataGridView_links.Sort(this.dataGridView_links.Columns["Column1"], ListSortDirection.Ascending);
             }
             foreach (DataGridViewRow row in dataGridView_links.Rows)
             {
-                if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                if (row.Cells[2].Value.ToString().Equals(row.Cells[3].Value.ToString()))
                 {
                     row.DefaultCellStyle.BackColor = Color.LightGreen;
                 }
@@ -61,6 +73,8 @@ namespace GameUpdater
             watcher.Changed += OnChanged;
 
             watcher.EnableRaisingEvents = true;
+
+            WriteDataToFile();
         }
 
         private void OnChanged(object source, FileSystemEventArgs e)
@@ -119,7 +133,13 @@ namespace GameUpdater
                         string regex_str = "<b>Version(:)?( )?</b>(:)?";
                         string tofind = "<b>Version";
 
-                        HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(items[3]);
+                        string regex_date = "<b>Release Date(:)?( )?</b>(:)?";
+                        string tofind_date = "<b>Release Date";
+
+                        var regex_tags = new System.Text.RegularExpressions.Regex("<title>\\[.*?\\]\\s?[A-z]{1}");
+                        string tofind_tags = items[1].ToString();
+
+                        HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(items[5]);
                         myRequest.Method = "GET";
                         WebResponse myResponse = myRequest.GetResponse();
                         sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);
@@ -128,20 +148,56 @@ namespace GameUpdater
 
                         if (System.Text.RegularExpressions.Regex.IsMatch(web_result, regex_str, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
                         {
-                            int start = web_result.IndexOf(tofind) + tofind.Length+6;
+                            int start = web_result.IndexOf(tofind) + tofind.Length + 6;
                             int end = web_result.IndexOf("<br />", start);
                             string current_version = web_result.Substring(start, end - start);
 
-                            items[1] = current_version;
+                            items[2] = current_version;
 
                         }
                         else
-                            items[1] = " ";
+                        {
+                            items[2] = " ";
+                        }
+
+                        if (System.Text.RegularExpressions.Regex.IsMatch(web_result, regex_date, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                        {
+                            int start = web_result.IndexOf(tofind_date) + tofind_date.Length + 6;
+                            int end = web_result.IndexOf("<br />", start);
+                            string lastest_release = web_result.Substring(start, end - start);
+
+                            items[4] = lastest_release;
+
+                        }
+                        else
+                        {
+                            items[4] = " ";
+                        }
+
+                        MatchCollection tags_matches = regex_tags.Matches(web_result);
+                        string tags = (tags_matches[0].Value).ToString();
+                        int length = tags.Length;
+
+                        if (tags != null)
+                        {
+                            tags = tags.Remove(tags.Length -1, 1);
+                            tags = tags.Remove(0,7);
+                            tags = WebUtility.HtmlDecode(tags);
+                            tags = tags.Replace(" ", "");
+                            tags = tags.Replace("-", "");
+                            items[0] = tags;
+                        }
+                        else
+                        {
+                            items[0] = " ";
+                        }
                     }
 
                     catch
                     {
-                        items[1] = " ";
+                        items[0] = " ";
+                        items[2] = " ";
+                        items[4] = " ";
                     }
 
 
@@ -197,7 +253,7 @@ namespace GameUpdater
                 }
                 foreach (DataGridViewRow row in dataGridView_links.Rows)
                 {
-                    if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                    if (row.Cells[2].Value.ToString().Equals(row.Cells[3].Value.ToString()))
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
                     }
@@ -243,8 +299,16 @@ namespace GameUpdater
                     {
                         row.Cells[3].Value = " ";
                     }
+                    if (row.Cells[4].Value == null)
+                    {
+                        row.Cells[4].Value = " ";
+                    }
+                    if (row.Cells[5].Value == null)
+                    {
+                        row.Cells[5].Value = " ";
+                    }
 
-                    line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString();
+                    line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString() + "," + row.Cells[4].Value.ToString() + "," + row.Cells[5].Value.ToString();
                     tw.WriteLine(line);
 
                 }
@@ -252,7 +316,7 @@ namespace GameUpdater
 
                 foreach (DataGridViewRow row in dataGridView_links.Rows)
                 {
-                    if (row.Cells[1].Value.ToString().Equals(row.Cells[2].Value.ToString()))
+                    if (row.Cells[2].Value.ToString().Equals(row.Cells[3].Value.ToString()))
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
                     }

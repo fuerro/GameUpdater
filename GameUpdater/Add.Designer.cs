@@ -68,9 +68,11 @@
             // 
             this.label_name.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label_name.AutoSize = true;
-            this.label_name.Location = new System.Drawing.Point(34, 13);
+            this.label_name.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_name.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label_name.Location = new System.Drawing.Point(40, 1);
             this.label_name.Name = "label_name";
-            this.label_name.Size = new System.Drawing.Size(81, 13);
+            this.label_name.Size = new System.Drawing.Size(75, 36);
             this.label_name.TabIndex = 3;
             this.label_name.Text = "Name of Game:";
             // 
@@ -78,9 +80,11 @@
             // 
             this.label_version.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label_version.AutoSize = true;
-            this.label_version.Location = new System.Drawing.Point(41, 52);
+            this.label_version.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label_version.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label_version.Location = new System.Drawing.Point(3, 49);
             this.label_version.Name = "label_version";
-            this.label_version.Size = new System.Drawing.Size(74, 13);
+            this.label_version.Size = new System.Drawing.Size(112, 18);
             this.label_version.TabIndex = 4;
             this.label_version.Text = "Local Version:";
             // 
@@ -88,32 +92,38 @@
             // 
             this.label_link.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label_link.AutoSize = true;
-            this.label_link.Location = new System.Drawing.Point(85, 91);
+            this.label_link.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label_link.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label_link.Location = new System.Drawing.Point(74, 88);
             this.label_link.Name = "label_link";
-            this.label_link.Size = new System.Drawing.Size(30, 13);
+            this.label_link.Size = new System.Drawing.Size(41, 18);
             this.label_link.TabIndex = 5;
             this.label_link.Text = "Link:";
             // 
             // button_add_item
             // 
             this.button_add_item.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_add_item.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.button_add_item.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.button_add_item.Location = new System.Drawing.Point(3, 120);
             this.button_add_item.Name = "button_add_item";
             this.button_add_item.Size = new System.Drawing.Size(111, 33);
             this.button_add_item.TabIndex = 6;
             this.button_add_item.Text = "Add";
-            this.button_add_item.UseVisualStyleBackColor = true;
+            this.button_add_item.UseVisualStyleBackColor = false;
             this.button_add_item.Click += new System.EventHandler(this.button_add_item_Click);
             // 
             // button_cancel
             // 
             this.button_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_cancel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.button_cancel.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.button_cancel.Location = new System.Drawing.Point(292, 120);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(111, 33);
             this.button_cancel.TabIndex = 7;
             this.button_cancel.Text = "Cancel";
-            this.button_cancel.UseVisualStyleBackColor = true;
+            this.button_cancel.UseVisualStyleBackColor = false;
             this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
             // tableLayoutPanel1
@@ -147,6 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(424, 176);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "form_add";
