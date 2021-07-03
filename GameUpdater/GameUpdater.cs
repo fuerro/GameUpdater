@@ -38,14 +38,19 @@ namespace GameUpdater
             while ((line = tr.ReadLine()) != null)
             {
                 int commaCount = Regex.Matches(line, ",").Count;
-                if (commaCount == 4)
-                {
-                    line = "," + line;
-                }
                 if (commaCount == 3)
                 {
-                    line = "," + line;
-                    line.Replace(",http", ",,http");
+                    line = line.Replace(",http", ", ,http");
+                    line = "," + line + ",";
+                }
+                if (commaCount == 4)
+                {
+                    line += ",";
+                    line = line.Replace(",http", ",,http");
+                }
+                if (commaCount == 5)
+                {
+                    line += ",";
                 }
                 string[] items = line.Trim().Split(',');
                 this.dataGridView_links.Rows.Add(items);
@@ -307,8 +312,12 @@ namespace GameUpdater
                     {
                         row.Cells[5].Value = " ";
                     }
+                    if (row.Cells[6].Value == null)
+                    {
+                        row.Cells[6].Value = "";
+                    }
 
-                    line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString() + "," + row.Cells[4].Value.ToString() + "," + row.Cells[5].Value.ToString();
+                    line = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString() + "," + row.Cells[4].Value.ToString() + "," + row.Cells[5].Value.ToString() + "," + row.Cells[6].Value.ToString();
                     tw.WriteLine(line);
 
                 }

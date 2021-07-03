@@ -32,15 +32,16 @@
             this.button_exit = new System.Windows.Forms.Button();
             this.button_refresh = new System.Windows.Forms.Button();
             this.dataGridView_links = new System.Windows.Forms.DataGridView();
-            this.button_add = new System.Windows.Forms.Button();
-            this.progressBar_checking = new System.Windows.Forms.ProgressBar();
-            this.button_openrepo = new System.Windows.Forms.Button();
             this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_add = new System.Windows.Forms.Button();
+            this.progressBar_checking = new System.Windows.Forms.ProgressBar();
+            this.button_openrepo = new System.Windows.Forms.Button();
+            this.Rating = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_links)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +86,8 @@
             this.Column2,
             this.Column3,
             this.Column5,
-            this.Column4});
+            this.Column4,
+            this.Rating});
             this.dataGridView_links.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dataGridView_links.Location = new System.Drawing.Point(12, 13);
             this.dataGridView_links.Name = "dataGridView_links";
@@ -93,6 +95,39 @@
             this.dataGridView_links.TabIndex = 2;
             this.dataGridView_links.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_links_CellEndEdit);
             this.dataGridView_links.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView_links_RowsRemoved);
+            // 
+            // Column0
+            // 
+            this.Column0.HeaderText = "Tags";
+            this.Column0.Name = "Column0";
+            this.Column0.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Name";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Online Version";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Local Version";
+            this.Column3.Name = "Column3";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Last Updated";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Link";
+            this.Column4.Name = "Column4";
             // 
             // button_add
             // 
@@ -130,38 +165,10 @@
             this.button_openrepo.UseVisualStyleBackColor = false;
             this.button_openrepo.Click += new System.EventHandler(this.button_openrepo_Click);
             // 
-            // Column0
+            // Rating
             // 
-            this.Column0.HeaderText = "Tags";
-            this.Column0.Name = "Column0";
-            this.Column0.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Name";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Online Version";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Local Version";
-            this.Column3.Name = "Column3";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Last Updated";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Link";
-            this.Column4.Name = "Column4";
+            this.Rating.HeaderText = "Rating";
+            this.Rating.Name = "Rating";
             // 
             // Form_gamesupdater
             // 
@@ -198,6 +205,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rating;
     }
 }
 
